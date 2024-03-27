@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_example/constants.dart';
-import 'package:food_example/models/category.dart';
-import 'package:food_example/models/food.dart';
 import 'package:food_example/widgets/categories.dart';
 import 'package:food_example/widgets/home_appbar.dart';
 import 'package:food_example/widgets/home_search_bar.dart';
 import 'package:food_example/widgets/quick_and_fast_list.dart';
-import 'package:iconsax/iconsax.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
