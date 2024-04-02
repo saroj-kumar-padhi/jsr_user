@@ -1,16 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:food_example/constants.dart';
-import 'package:food_example/models/food.dart';
+import 'package:food_example/controllers/foodController.dart';
 import 'package:food_example/controllers/mainScreenController.dart';
 import 'package:food_example/widgets/food_counter.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-class RecipeScreen extends StatelessWidget {
-  final Food food;
+class BuyFoodScreen extends StatelessWidget {
+  final Map<String, dynamic> food;
   MainScreenController mainScreenController = Get.put(MainScreenController());
-  RecipeScreen({super.key, required this.food});
+  FoodController foodController = Get.put(FoodController());
+  BuyFoodScreen({super.key, required this.food});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class RecipeScreen extends StatelessWidget {
                   backgroundColor: kprimaryColor,
                   foregroundColor: Colors.white,
                 ),
-                child: const Text("Start Cooking"),
+                child: const Text("Make it Own"),
               ),
             ),
             const SizedBox(width: 10),
@@ -43,9 +45,9 @@ class RecipeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                icon: Icon(
-                  food.isLiked ? Iconsax.heart5 : Iconsax.heart,
-                  color: food.isLiked ? Colors.red : Colors.black,
+                icon: const Icon(
+                  Iconsax.heart5,
+                  color: Colors.red,
                   size: 20,
                 ),
               ),
@@ -64,7 +66,7 @@ class RecipeScreen extends StatelessWidget {
                     height: MediaQuery.of(context).size.width - 20,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(food.image),
+                        image: NetworkImage(food['foodImage']),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -137,39 +139,39 @@ class RecipeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    food.name,
+                    food['foodName'],
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Row(
+                  const Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Iconsax.flash_1,
                         size: 20,
                         color: Colors.grey,
                       ),
                       Text(
-                        "${food.cal} Cal",
-                        style: const TextStyle(
+                        "20 Cal",
+                        style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey,
                         ),
                       ),
-                      const Text(
+                      Text(
                         " · ",
                         style: TextStyle(color: Colors.grey),
                       ),
-                      const Icon(
+                      Icon(
                         Iconsax.clock,
                         size: 20,
                         color: Colors.grey,
                       ),
                       Text(
-                        "${food.time} Min",
-                        style: const TextStyle(
+                        "30 Min",
+                        style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey,
                         ),
@@ -186,7 +188,7 @@ class RecipeScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        "${food.rate}/5",
+                        "4/5",
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey.shade600,
@@ -194,7 +196,7 @@ class RecipeScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        "(${food.reviews} Reviews)",
+                        "(23 Reviews)",
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey.shade400,
@@ -209,7 +211,7 @@ class RecipeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Ingredients",
+                            "Make it Own",
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -240,112 +242,49 @@ class RecipeScreen extends StatelessWidget {
                           ))
                     ],
                   ),
-                  const SizedBox(height: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                image: AssetImage(food.image),
-                                fit: BoxFit.fill,
+                  const SizedBox(height: 10),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: foodController.fetchedFoodItems.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                  image: NetworkImage(foodController
+                                      .fetchedFoodItems[index]['foodImage']),
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(width: 10),
-                          const Text(
-                            "Ramen Noodles",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const Spacer(),
-                          Text(
-                            "400g",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey.shade400,
-                            ),
-                          )
-                        ],
-                      ),
-                      Divider(
-                        height: 20,
-                        color: Colors.grey.shade300,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                image: AssetImage(food.image),
-                                fit: BoxFit.fill,
+                            const SizedBox(width: 10),
+                            Text(
+                              foodController.fetchedFoodItems[index]
+                                  ['foodName'],
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
-                          const SizedBox(width: 10),
-                          const Text(
-                            "Ramen Noodles",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const Spacer(),
-                          Text(
-                            "400g",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey.shade400,
-                            ),
-                          )
-                        ],
-                      ),
-                      Divider(
-                        height: 20,
-                        color: Colors.grey.shade300,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                image: AssetImage(food.image),
-                                fit: BoxFit.fill,
+                            const Spacer(),
+                            Text(
+                              "400g",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey.shade400,
                               ),
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          const Text(
-                            "Ramen Noodles",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const Spacer(),
-                          Text(
-                            "400g",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey.shade400,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
+                            )
+                          ],
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(height: 20),
                 ],

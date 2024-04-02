@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:food_example/controllers/foodController.dart';
 import 'package:food_example/models/food.dart';
+import 'package:food_example/screens/recipe_screen.dart';
 import 'package:food_example/widgets/food_card.dart';
 import 'package:food_example/widgets/quick_screen_appbar.dart';
+import 'package:get/get.dart';
 
-class QuickFoodsScreen extends StatelessWidget {
-  const QuickFoodsScreen({super.key});
+class AvailableFoodsScreen extends StatelessWidget {
+  FoodController foodController = Get.put(FoodController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +31,14 @@ class QuickFoodsScreen extends StatelessWidget {
                     crossAxisSpacing: 20,
                     mainAxisSpacing: 25,
                   ),
-                  itemBuilder: (context, index) => FoodCard(
-                    food: foods[index],
+                  itemBuilder: (context, index) => InkWell(
+                    onTap: () {
+                      Get.to(() => BuyFoodScreen(
+                          food: foodController.fetchedFoodItems[index]));
+                    },
+                    child: FoodCard(
+                      food: foodController.fetchedFoodItems[index],
+                    ),
                   ),
                   itemCount: foods.length,
                 )

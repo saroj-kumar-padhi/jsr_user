@@ -31,7 +31,7 @@ class AvailableFoodList extends StatelessWidget {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const QuickFoodsScreen(),
+                  builder: (context) => AvailableFoodsScreen(),
                 ),
               ),
               child: const Text("View all"),
@@ -59,12 +59,12 @@ class AvailableFoodList extends StatelessWidget {
                   itemBuilder: (context, index) {
                     var food = foodController.fetchedFoodItems[index];
                     return GestureDetector(
-                      // onTap: () => Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => RecipeScreen(food: food),
-                      //   ),
-                      // ),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BuyFoodScreen(food: food),
+                        ),
+                      ),
                       child: Container(
                         margin: const EdgeInsets.only(right: 10),
                         width: 200,

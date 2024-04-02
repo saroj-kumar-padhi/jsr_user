@@ -4,18 +4,18 @@ import 'package:food_example/screens/recipe_screen.dart';
 import 'package:iconsax/iconsax.dart';
 
 class FoodCard extends StatelessWidget {
-  final Food food;
+  final Map<String, dynamic> food;
   const FoodCard({super.key, required this.food});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => RecipeScreen(food: food),
-        ),
-      ),
+      // onTap: () => Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => RecipeScreen(food: food),
+      //   ),
+      // ),
       child: SizedBox(
         width: double.infinity,
         child: Stack(
@@ -29,14 +29,14 @@ class FoodCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
-                      image: AssetImage(food.image),
+                      image: NetworkImage(food['foodImage']),
                       fit: BoxFit.fill,
                     ),
                   ),
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  food.name,
+                  food['foodName'],
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
@@ -50,7 +50,7 @@ class FoodCard extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     Text(
-                      "${food.cal} Cal",
+                      "1368 Cal",
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
@@ -66,7 +66,7 @@ class FoodCard extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     Text(
-                      "${food.time} Min",
+                      "30 Min",
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
@@ -80,7 +80,7 @@ class FoodCard extends StatelessWidget {
                         color: Colors.yellow.shade700, size: 20),
                     const SizedBox(width: 5),
                     Text(
-                      "${food.rate}/5",
+                      "4/5",
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey.shade600,
@@ -88,7 +88,7 @@ class FoodCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      "(${food.reviews} Reviews)",
+                      "(26 Reviews)",
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey.shade400,
@@ -108,12 +108,7 @@ class FoodCard extends StatelessWidget {
                   fixedSize: const Size(30, 30),
                 ),
                 iconSize: 20,
-                icon: food.isLiked!
-                    ? const Icon(
-                        Iconsax.heart5,
-                        color: Colors.red,
-                      )
-                    : const Icon(Iconsax.heart),
+                icon: const Icon(Iconsax.heart),
               ),
             )
           ],
