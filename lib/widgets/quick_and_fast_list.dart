@@ -16,7 +16,7 @@ class QuickAndFastList extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              "Quick & Fast",
+              "Best foods available",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

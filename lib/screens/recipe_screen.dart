@@ -2,19 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_example/constants.dart';
 import 'package:food_example/models/food.dart';
+import 'package:food_example/controllers/mainScreenController.dart';
 import 'package:food_example/widgets/food_counter.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-class RecipeScreen extends StatefulWidget {
+class RecipeScreen extends StatelessWidget {
   final Food food;
-  const RecipeScreen({super.key, required this.food});
-
-  @override
-  State<RecipeScreen> createState() => _RecipeScreenState();
-}
-
-class _RecipeScreenState extends State<RecipeScreen> {
-  int currentNumber = 1;
+  MainScreenController mainScreenController = Get.put(MainScreenController());
+  RecipeScreen({super.key, required this.food});
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +44,8 @@ class _RecipeScreenState extends State<RecipeScreen> {
                   ),
                 ),
                 icon: Icon(
-                  widget.food.isLiked ? Iconsax.heart5 : Iconsax.heart,
-                  color: widget.food.isLiked ? Colors.red : Colors.black,
+                  food.isLiked ? Iconsax.heart5 : Iconsax.heart,
+                  color: food.isLiked ? Colors.red : Colors.black,
                   size: 20,
                 ),
               ),
@@ -68,7 +64,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                     height: MediaQuery.of(context).size.width - 20,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(widget.food.image),
+                        image: AssetImage(food.image),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -141,7 +137,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.food.name,
+                    food.name,
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -156,7 +152,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                         color: Colors.grey,
                       ),
                       Text(
-                        "${widget.food.cal} Cal",
+                        "${food.cal} Cal",
                         style: const TextStyle(
                           fontSize: 14,
                           color: Colors.grey,
@@ -172,7 +168,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                         color: Colors.grey,
                       ),
                       Text(
-                        "${widget.food.time} Min",
+                        "${food.time} Min",
                         style: const TextStyle(
                           fontSize: 14,
                           color: Colors.grey,
@@ -190,7 +186,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        "${widget.food.rate}/5",
+                        "${food.rate}/5",
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey.shade600,
@@ -198,7 +194,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        "(${widget.food.reviews} Reviews)",
+                        "(${food.reviews} Reviews)",
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey.shade400,
@@ -230,19 +226,18 @@ class _RecipeScreenState extends State<RecipeScreen> {
                         ],
                       ),
                       const Spacer(),
-                      FoodCounter(
-                        currentNumber: currentNumber,
-                        onAdd: () => setState(() {
-                          currentNumber++;
-                        }),
-                        onRemove: () {
-                          if (currentNumber != 1) {
-                            setState(() {
-                              currentNumber--;
-                            });
-                          }
-                        },
-                      )
+                      Obx(() => FoodCounter(
+                            currentNumber:
+                                mainScreenController.currentNumber.value,
+                            onAdd: () =>
+                                mainScreenController.currentNumber.value++,
+                            onRemove: () {
+                              if (mainScreenController.currentNumber.value !=
+                                  1) {
+                                mainScreenController.currentNumber.value--;
+                              }
+                            },
+                          ))
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -257,7 +252,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                               image: DecorationImage(
-                                image: AssetImage(widget.food.image),
+                                image: AssetImage(food.image),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -292,7 +287,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                               image: DecorationImage(
-                                image: AssetImage(widget.food.image),
+                                image: AssetImage(food.image),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -327,7 +322,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                               image: DecorationImage(
-                                image: AssetImage(widget.food.image),
+                                image: AssetImage(food.image),
                                 fit: BoxFit.fill,
                               ),
                             ),

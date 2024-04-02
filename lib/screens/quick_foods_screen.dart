@@ -3,16 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:food_example/models/food.dart';
 import 'package:food_example/widgets/food_card.dart';
 import 'package:food_example/widgets/quick_screen_appbar.dart';
-import 'package:iconsax/iconsax.dart';
 
-class QuickFoodsScreen extends StatefulWidget {
+class QuickFoodsScreen extends StatelessWidget {
   const QuickFoodsScreen({super.key});
 
-  @override
-  State<QuickFoodsScreen> createState() => _QuickFoodsScreenState();
-}
-
-class _QuickFoodsScreenState extends State<QuickFoodsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +25,7 @@ class _QuickFoodsScreenState extends State<QuickFoodsScreen> {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
+                    mainAxisSpacing: 25,
                   ),
                   itemBuilder: (context, index) => FoodCard(
                     food: foods[index],

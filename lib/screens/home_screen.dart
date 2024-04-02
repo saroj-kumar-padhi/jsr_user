@@ -4,14 +4,7 @@ import 'package:food_example/widgets/home_appbar.dart';
 import 'package:food_example/widgets/home_search_bar.dart';
 import 'package:food_example/widgets/quick_and_fast_list.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends StatelessWidget {
   String currentCat = "All";
 
   @override

@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "570322647130",
+    "project_id": "jsrservices-9af06",
+    "storage_bucket": "jsrservices-9af06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570322647130:android:bca04fe02786f3ae384063",
+        "android_client_info": {
+          "package_name": "com.example.food_example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570322647130-rthp7l40l08kkvphu981k79trdl6cncn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGP9qkAHOkwRi5divDoIkOdFaTMUmNz9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570322647130-rthp7l40l08kkvphu981k79trdl6cncn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "570322647130-b187jqh6ucr9dhrehsve20na05letq15.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jsrTiffin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570322647130:android:6fd2c0ffff873d81384063",
+        "android_client_info": {
+          "package_name": "com.example.jsr_tiffin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570322647130-c7a0c4oa0ikjouf3ake8bqu41j0kef6a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jsr_tiffin",
+            "certificate_hash": "6e69cb95b8a7c71140fd2958207c630d5ae07a5d"
+          }
+        },
+        {
+          "client_id": "570322647130-jqu9asabsek28il33bgm71kcg6n95i5n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jsr_tiffin",
+            "certificate_hash": "50d721acd31cdeab9ac27d723f2ce28ecf0e1b32"
+          }
+        },
+        {
+          "client_id": "570322647130-rthp7l40l08kkvphu981k79trdl6cncn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGP9qkAHOkwRi5divDoIkOdFaTMUmNz9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570322647130-rthp7l40l08kkvphu981k79trdl6cncn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "570322647130-b187jqh6ucr9dhrehsve20na05letq15.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jsrTiffin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

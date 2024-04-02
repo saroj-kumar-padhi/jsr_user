@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:food_example/constants.dart';
 import 'package:food_example/screens/home_screen.dart';
+import 'package:food_example/controllers/mainScreenController.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+class MainScreen extends StatelessWidget {
+  MainScreen({super.key});
 
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int currentTab = 0;
-  List screens = const [
+  List screens = [
     HomeScreen(),
-    Scaffold(),
-    Scaffold(),
-    Scaffold(),
+    const Scaffold(),
+    const Scaffold(),
+    const Scaffold(),
   ];
+
+  MainScreenController mainScreenController = Get.put(MainScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,89 +27,123 @@ class _MainScreenState extends State<MainScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
-              onTap: () => setState(() {
-                currentTab = 0;
-              }),
+              onTap: () => mainScreenController.currentTab.value = 0,
               child: Column(
                 children: [
-                  Icon(
-                    currentTab == 0 ? Iconsax.home5 : Iconsax.home,
-                    color: currentTab == 0 ? kprimaryColor : Colors.grey,
-                  ),
-                  Text(
-                    "Home",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: currentTab == 0 ? kprimaryColor : Colors.grey,
+                  Obx(
+                    () => Icon(
+                      mainScreenController.currentTab.value == 0
+                          ? Iconsax.home5
+                          : Iconsax.home,
+                      color: mainScreenController.currentTab.value == 0
+                          ? kprimaryColor
+                          : Colors.grey,
                     ),
                   ),
+                  Obx(
+                    () => Text(
+                      "Home",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: mainScreenController.currentTab.value == 0
+                            ? kprimaryColor
+                            : Colors.grey,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
             GestureDetector(
-              onTap: () => setState(() {
-                currentTab = 1;
-              }),
+              onTap: () => mainScreenController.currentTab.value = 1,
               child: Column(
                 children: [
-                  Icon(
-                    currentTab == 1 ? Iconsax.heart5 : Iconsax.heart,
-                    color: currentTab == 1 ? kprimaryColor : Colors.grey,
-                  ),
-                  Text(
-                    "Favorites",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: currentTab == 1 ? kprimaryColor : Colors.grey,
+                  Obx(
+                    () => Icon(
+                      mainScreenController.currentTab.value == 1
+                          ? Iconsax.heart5
+                          : Iconsax.heart,
+                      color: mainScreenController.currentTab.value == 1
+                          ? kprimaryColor
+                          : Colors.grey,
                     ),
                   ),
+                  Obx(
+                    () => Text(
+                      "Favorites",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: mainScreenController.currentTab.value == 1
+                            ? kprimaryColor
+                            : Colors.grey,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
             GestureDetector(
-              onTap: () => setState(() {
-                currentTab = 2;
-              }),
+              onTap: () => mainScreenController.currentTab.value = 2,
               child: Column(
                 children: [
-                  Icon(
-                    currentTab == 2 ? Iconsax.calendar_25 : Iconsax.calendar_2,
-                    color: currentTab == 2 ? kprimaryColor : Colors.grey,
-                  ),
-                  Text(
-                    "Meal Plan",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: currentTab == 2 ? kprimaryColor : Colors.grey,
+                  Obx(
+                    () => Icon(
+                      mainScreenController.currentTab.value == 2
+                          ? Iconsax.calendar_25
+                          : Iconsax.calendar_2,
+                      color: mainScreenController.currentTab.value == 2
+                          ? kprimaryColor
+                          : Colors.grey,
                     ),
                   ),
+                  Obx(
+                    () => Text(
+                      "Meal Plan",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: mainScreenController.currentTab.value == 2
+                            ? kprimaryColor
+                            : Colors.grey,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
             GestureDetector(
-              onTap: () => setState(() {
-                currentTab = 3;
-              }),
+              onTap: () {
+                mainScreenController.currentTab.value = 3;
+              },
               child: Column(
                 children: [
-                  Icon(
-                    currentTab == 3 ? Iconsax.setting5 : Iconsax.setting,
-                    color: currentTab == 3 ? kprimaryColor : Colors.grey,
-                  ),
-                  Text(
-                    "Settings",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: currentTab == 3 ? kprimaryColor : Colors.grey,
+                  Obx(
+                    () => Icon(
+                      mainScreenController.currentTab.value == 3
+                          ? Iconsax.setting5
+                          : Iconsax.setting,
+                      color: mainScreenController.currentTab.value == 3
+                          ? kprimaryColor
+                          : Colors.grey,
                     ),
                   ),
+                  Obx(
+                    () => Text(
+                      "Settings",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: mainScreenController.currentTab.value == 3
+                            ? kprimaryColor
+                            : Colors.grey,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
           ],
         ),
       ),
-      body: screens[currentTab],
+      body: Obx(() => screens[mainScreenController.currentTab.value]),
     );
   }
 }

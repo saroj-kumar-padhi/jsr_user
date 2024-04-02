@@ -25,7 +25,7 @@ class FoodCard extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 100,
+                  height: MediaQuery.of(context).size.height * 0.1,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(

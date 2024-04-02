@@ -11,7 +11,7 @@ class HomeAppbar extends StatelessWidget {
     return Row(
       children: [
         const Text(
-          "What are you\ncooking today?",
+          "What are you\nlooking today?",
           style: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
