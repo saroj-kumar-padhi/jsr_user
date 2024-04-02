@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:570322647130:android:bca04fe02786f3ae384063",
         "android_client_info": {
-          "package_name": "com.example.food_example"
+          "package_name": "com.example.JSR_User"
         }
       },
       "oauth_client": [
@@ -45,7 +45,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:570322647130:android:6fd2c0ffff873d81384063",
         "android_client_info": {
-          "package_name": "com.example.jsr_tiffin"
+          "package_name": "com.example.JSR_User"
         }
       },
       "oauth_client": [
@@ -53,7 +53,7 @@
           "client_id": "570322647130-c7a0c4oa0ikjouf3ake8bqu41j0kef6a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.jsr_tiffin",
+            "package_name": "com.example.JSR_User",
             "certificate_hash": "6e69cb95b8a7c71140fd2958207c630d5ae07a5d"
           }
         },
@@ -61,7 +61,7 @@
           "client_id": "570322647130-jqu9asabsek28il33bgm71kcg6n95i5n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.jsr_tiffin",
+            "package_name": "com.example.JSR_User",
             "certificate_hash": "50d721acd31cdeab9ac27d723f2ce28ecf0e1b32"
           }
         },

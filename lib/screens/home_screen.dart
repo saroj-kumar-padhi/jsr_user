@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 Categories(currentCat: currentCat),
                 const SizedBox(height: 20),
-                const QuickAndFastList(),
+                AvailableFoodList(),
               ],
             ),
           ),
