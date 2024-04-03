@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_example/models/food.dart';
-import 'package:food_example/screens/recipe_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:food_example/screens/Buyfood.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class FoodCard extends StatelessWidget {
@@ -10,12 +12,12 @@ class FoodCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () => Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => RecipeScreen(food: food),
-      //   ),
-      // ),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BuyFoodScreen(food: food),
+        ),
+      ),
       child: SizedBox(
         width: double.infinity,
         child: Stack(
@@ -50,7 +52,7 @@ class FoodCard extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     Text(
-                      "1368 Cal",
+                      "${food['cal']} Cal",
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
@@ -66,7 +68,7 @@ class FoodCard extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     Text(
-                      "30 Min",
+                      food['time'],
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
@@ -102,7 +104,90 @@ class FoodCard extends StatelessWidget {
               top: 1,
               right: 1,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (FirebaseAuth.instance.currentUser == null) {
+                    Get.dialog(
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Material(
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(height: 10),
+                                      const Text(
+                                        "Title Text",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 15),
+                                      const Text(
+                                        "Message Text",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 20),
+                                      //Buttons
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                minimumSize: const Size(0, 45),
+                                                foregroundColor: Colors.amber,
+                                                backgroundColor:
+                                                    const Color(0xFFFFFFFF),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                              ),
+                                              onPressed: () {},
+                                              child: const Text(
+                                                'NO',
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Expanded(
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                minimumSize: const Size(0, 45),
+                                                foregroundColor: Colors.amber,
+                                                backgroundColor:
+                                                    const Color(0xFFFFFFFF),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                              ),
+                                              onPressed: () {},
+                                              child: const Text(
+                                                'YES',
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
                 style: IconButton.styleFrom(
                   backgroundColor: Colors.white,
                   fixedSize: const Size(30, 30),

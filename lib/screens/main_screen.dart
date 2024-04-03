@@ -5,8 +5,8 @@ import 'package:food_example/controllers/mainScreenController.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-class MainScreen extends StatelessWidget {
-  MainScreen({super.key});
+class MyMainScreen extends StatelessWidget {
+  MyMainScreen({super.key});
 
   List screens = [
     HomeScreen(),

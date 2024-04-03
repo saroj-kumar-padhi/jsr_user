@@ -1,17 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:food_example/constants.dart';
 import 'package:food_example/controllers/foodController.dart';
 import 'package:food_example/controllers/mainScreenController.dart';
+import 'package:food_example/models/food.dart';
 import 'package:food_example/widgets/food_counter.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class BuyFoodScreen extends StatelessWidget {
   final Map<String, dynamic> food;
-  MainScreenController mainScreenController = Get.put(MainScreenController());
-  FoodController foodController = Get.put(FoodController());
+  final MainScreenController mainScreenController =
+      Get.put(MainScreenController());
+  final FoodController foodController = Get.put(FoodController());
   BuyFoodScreen({super.key, required this.food});
 
   @override
@@ -146,32 +148,32 @@ class BuyFoodScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  const Row(
+                  Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Iconsax.flash_1,
                         size: 20,
                         color: Colors.grey,
                       ),
                       Text(
-                        "20 Cal",
-                        style: TextStyle(
+                        "${food['cal']} Cal",
+                        style: const TextStyle(
                           fontSize: 14,
                           color: Colors.grey,
                         ),
                       ),
-                      Text(
+                      const Text(
                         " · ",
                         style: TextStyle(color: Colors.grey),
                       ),
-                      Icon(
+                      const Icon(
                         Iconsax.clock,
                         size: 20,
                         color: Colors.grey,
                       ),
                       Text(
-                        "30 Min",
-                        style: TextStyle(
+                        food['time'],
+                        style: const TextStyle(
                           fontSize: 14,
                           color: Colors.grey,
                         ),
@@ -245,7 +247,7 @@ class BuyFoodScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: foodController.fetchedFoodItems.length,
                     itemBuilder: (context, index) {
                       return Padding(

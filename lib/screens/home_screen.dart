@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:food_example/widgets/categories.dart';
 import 'package:food_example/widgets/home_appbar.dart';
 import 'package:food_example/widgets/home_search_bar.dart';
-import 'package:food_example/widgets/quick_and_fast_list.dart';
+import 'package:food_example/widgets/quickAccessHorizontal.dart';
 
 class HomeScreen extends StatelessWidget {
   String currentCat = "All";
+
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
