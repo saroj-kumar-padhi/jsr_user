@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:food_example/screens/searchPage.dart';
+import 'package:food_example/screens/utiles/coustomSerchLike.dart';
 import 'package:food_example/widgets/categories.dart';
 import 'package:food_example/widgets/home_appbar.dart';
-import 'package:food_example/widgets/home_search_bar.dart';
+
 import 'package:food_example/widgets/quickAccessHorizontal.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  String currentCat = "All";
+  final String currentCat = "All";
 
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,11 @@ class HomeScreen extends StatelessWidget {
               children: [
                 const HomeAppbar(),
                 const SizedBox(height: 20),
-                const HomeSearchBar(),
+                InkWell(
+                    onTap: () {
+                      Get.to(() => SearchPage());
+                    },
+                    child: const HomeSearchContainer()),
                 const SizedBox(height: 20),
                 Container(
                   width: double.infinity,

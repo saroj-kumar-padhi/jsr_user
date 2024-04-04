@@ -1,14 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class FoodController extends GetxController {
+  RxBool isLoading = false.obs;
   @override
+  Future<void> onInit() async {
+    super.onInit();
+    await getFoodItems();
+  }
+
   RxList<RxMap<String, dynamic>> fetchedFoodItems =
       <RxMap<String, dynamic>>[].obs;
-  RxBool isLoading = false.obs;
 
   Future<void> getFoodItems() async {
     fetchedFoodItems.clear();
@@ -20,10 +24,10 @@ class FoodController extends GetxController {
           await fireStore.collection('admin').get();
 
       // Now you can iterate through the documents in the query snapshot
-      querySnapshot.docs.forEach((DocumentSnapshot document) {
+      for (var document in querySnapshot.docs) {
         var data = document.data() as Map<String, dynamic>;
         fetchedFoodItems.add(data.obs);
-      });
+      }
 
       // Put fetched items into 'users' collection
       // await putFetchedItemsToUsersCollection(fetchedFoodItems);

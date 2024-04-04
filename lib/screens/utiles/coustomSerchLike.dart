@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:food_example/controllers/serchController.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-class HomeSearchBar extends StatelessWidget {
-  SerchController serchController = Get.put(SerchController());
-  HomeSearchBar({
-    super.key,
-  });
+class HomeSearchContainer extends StatelessWidget {
+  const HomeSearchContainer({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +23,17 @@ class HomeSearchBar extends StatelessWidget {
           const Icon(Iconsax.search_normal),
           const SizedBox(width: 10),
           Expanded(
-            child: TextField(
-              controller: serchController.serchController,
-              onChanged: (value) {
-                if (value != "") {
-                  serchController.performSearch(value);
-                }
-              },
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: "Search any food",
-                hintStyle: TextStyle(
+            child: Container(
+              // Replace TextField with Container
+              decoration: BoxDecoration(
+                // Add your container decoration here
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: const EdgeInsets.all(10),
+              child: const Text(
+                "Search any food",
+                style: TextStyle(
                   color: Colors.grey,
                 ),
               ),

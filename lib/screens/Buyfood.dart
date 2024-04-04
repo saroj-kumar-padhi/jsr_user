@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_example/constants.dart';
 import 'package:food_example/controllers/foodController.dart';
 import 'package:food_example/controllers/mainScreenController.dart';
-import 'package:food_example/models/food.dart';
 import 'package:food_example/widgets/food_counter.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';

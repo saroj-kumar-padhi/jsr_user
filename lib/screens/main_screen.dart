@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_example/constants.dart';
 import 'package:food_example/screens/home_screen.dart';
 import 'package:food_example/controllers/mainScreenController.dart';
+import 'package:food_example/screens/settings.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -9,10 +10,10 @@ class MyMainScreen extends StatelessWidget {
   MyMainScreen({super.key});
 
   List screens = [
-    HomeScreen(),
+    const HomeScreen(),
     const Scaffold(),
     const Scaffold(),
-    const Scaffold(),
+    const MySettings(),
   ];
 
   MainScreenController mainScreenController = Get.put(MainScreenController());
@@ -61,8 +62,8 @@ class MyMainScreen extends StatelessWidget {
                   Obx(
                     () => Icon(
                       mainScreenController.currentTab.value == 1
-                          ? Iconsax.heart5
-                          : Iconsax.heart,
+                          ? Iconsax.shopping_cart
+                          : Iconsax.shopping_cart,
                       color: mainScreenController.currentTab.value == 1
                           ? kprimaryColor
                           : Colors.grey,
@@ -70,7 +71,7 @@ class MyMainScreen extends StatelessWidget {
                   ),
                   Obx(
                     () => Text(
-                      "Favorites",
+                      "Cart",
                       style: TextStyle(
                         fontSize: 14,
                         color: mainScreenController.currentTab.value == 1
@@ -89,8 +90,8 @@ class MyMainScreen extends StatelessWidget {
                   Obx(
                     () => Icon(
                       mainScreenController.currentTab.value == 2
-                          ? Iconsax.calendar_25
-                          : Iconsax.calendar_2,
+                          ? Icons.person
+                          : Icons.person,
                       color: mainScreenController.currentTab.value == 2
                           ? kprimaryColor
                           : Colors.grey,
@@ -98,7 +99,7 @@ class MyMainScreen extends StatelessWidget {
                   ),
                   Obx(
                     () => Text(
-                      "Meal Plan",
+                      "Profile",
                       style: TextStyle(
                         fontSize: 14,
                         color: mainScreenController.currentTab.value == 2

@@ -1,9 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_example/controllers/foodController.dart';
-import 'package:food_example/screens/phone.dart';
 import 'package:food_example/screens/viewAllFoodScreen.dart';
 import 'package:food_example/screens/Buyfood.dart';
 import 'package:get/get.dart';
@@ -42,21 +39,15 @@ class AvailableFoodList extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 20),
-        FutureBuilder(
-          future: foodController.getFoodItems(), // Call getFoodItems method
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('Error: ${snapshot.error}'),
-              );
-            } else {
-              return SizedBox(
-                height: 200, // Set the height of the ListView
-                child: ListView.builder(
+        SizedBox(
+            height: 200, // Set the height of the ListView
+            child: Obx(() {
+              if (foodController.isLoading.value) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: foodController.fetchedFoodItems.length,
                   itemBuilder: (context, index) {
@@ -134,170 +125,14 @@ class AvailableFoodList extends StatelessWidget {
                                 )
                               ],
                             ),
-                            Positioned(
-                              top: 1,
-                              right: 1,
-                              child: IconButton(
-                                onPressed: () async {
-                                  if (FirebaseAuth.instance.currentUser ==
-                                      null) {
-                                    Get.dialog(
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 40),
-                                            child: Container(
-                                              decoration: const BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(20),
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(20.0),
-                                                child: Material(
-                                                  child: Column(
-                                                    children: [
-                                                      const SizedBox(
-                                                          height: 10),
-                                                      const Text(
-                                                        "Sign In",
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                      ),
-                                                      const SizedBox(
-                                                          height: 15),
-                                                      const Text(
-                                                        "To enable this feature you have to sign in",
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                      ),
-                                                      const SizedBox(
-                                                          height: 20),
-                                                      //Buttons
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            child:
-                                                                ElevatedButton(
-                                                              style:
-                                                                  ElevatedButton
-                                                                      .styleFrom(
-                                                                minimumSize:
-                                                                    const Size(
-                                                                        0, 45),
-                                                                foregroundColor:
-                                                                    Colors
-                                                                        .amber,
-                                                                backgroundColor:
-                                                                    const Color(
-                                                                        0xFFFFFFFF),
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8),
-                                                                ),
-                                                              ),
-                                                              onPressed: () {
-                                                                Get.back();
-                                                              },
-                                                              child: const Text(
-                                                                'Cancel',
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          const SizedBox(
-                                                              width: 10),
-                                                          Expanded(
-                                                            child:
-                                                                ElevatedButton(
-                                                              style:
-                                                                  ElevatedButton
-                                                                      .styleFrom(
-                                                                minimumSize:
-                                                                    const Size(
-                                                                        0, 45),
-                                                                foregroundColor:
-                                                                    Colors
-                                                                        .amber,
-                                                                backgroundColor:
-                                                                    const Color(
-                                                                        0xFFFFFFFF),
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8),
-                                                                ),
-                                                              ),
-                                                              onPressed: () {
-                                                                Get.to(() =>
-                                                                    const LogIn());
-                                                              },
-                                                              child: const Text(
-                                                                'Sign In',
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  } else {
-                                    await FirebaseFirestore.instance
-                                        .collection('users')
-                                        .doc(FirebaseAuth
-                                            .instance.currentUser!.uid)
-                                        .collection('ownItems')
-                                        .where('foodName',
-                                            isEqualTo: food['foodName'])
-                                        .get()
-                                        .then((querySnapshot) {
-                                      for (var doc in querySnapshot.docs) {
-                                        doc.reference.update({'isLiked': true});
-                                      }
-                                    });
-
-                                    // .update({'isLiked': true});
-                                  }
-                                },
-                                style: IconButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  fixedSize: const Size(30, 30),
-                                ),
-                                iconSize: 20,
-                                icon: Icon(
-                                  Iconsax.heart,
-                                  color: food['isLiked'] == true
-                                      ? Colors.red
-                                      : Colors.white,
-                                ),
-                              ),
-                            )
                           ],
                         ),
                       ),
                     );
                   },
-                ),
-              );
-            }
-          },
-        ),
+                );
+              }
+            }))
       ],
     );
   }
