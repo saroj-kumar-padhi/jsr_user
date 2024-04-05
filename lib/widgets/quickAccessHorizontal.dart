@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_example/controllers/foodController.dart';
 import 'package:food_example/screens/viewAllFoodScreen.dart';
@@ -125,6 +127,26 @@ class AvailableFoodList extends StatelessWidget {
                                 )
                               ],
                             ),
+                            Positioned(
+                                right: 5,
+                                top: 5,
+                                child: IconButton(
+                                    onPressed: () async {
+                                      CollectionReference collectionReference =
+                                          FirebaseFirestore.instance
+                                              .collection('users')
+                                              .doc(FirebaseAuth
+                                                  .instance.currentUser!.uid)
+                                              .collection('userHistory');
+
+                                      await collectionReference.add({
+                                        'foodName': food['foodName'],
+                                        'foodImage': food['foodImage'],
+                                        'cal': food['cal'],
+                                        'time': food['time']
+                                      });
+                                    },
+                                    icon: const Icon(Icons.shopping_cart)))
                           ],
                         ),
                       ),

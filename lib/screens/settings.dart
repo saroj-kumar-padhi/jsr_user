@@ -2,6 +2,8 @@ import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_example/constants.dart';
+import 'package:food_example/screens/utiles/CostmomDialog.dart';
+import 'package:food_example/screens/utiles/bigUserCard.dart';
 
 class MySettings extends StatelessWidget {
   const MySettings({super.key});
@@ -14,36 +16,35 @@ class MySettings extends StatelessWidget {
         child: ListView(
           children: [
             // User card
-            BigUserCard(
+            const CustBigUserCard(
               backgroundColor: kprimaryColor,
-              userName: "Chief suraj",
-              userProfilePic: const AssetImage(
+              userName: "6280644889",
+              userProfilePic: AssetImage(
                 "assets/images/profile.png",
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             SettingsGroup(
               items: [
                 SettingsItem(
                   onTap: () {},
-                  icons: CupertinoIcons.pencil_outline,
+                  icons: CupertinoIcons.bubble_left_bubble_right_fill,
                   iconStyle: IconStyle(),
-                  title: 'Appearance',
-                  subtitle: "Make Ziar'App yours",
+                  title: 'Notifications',
+                  subtitle: "Your's Notification",
                 ),
                 SettingsItem(
                   onTap: () {},
-                  icons: Icons.dark_mode_rounded,
+                  icons: Icons.history,
                   iconStyle: IconStyle(
                     iconsColor: Colors.white,
                     withBackground: true,
                     backgroundColor: Colors.red,
                   ),
-                  title: 'Dark mode',
-                  subtitle: "Automatic",
-                  trailing: Switch.adaptive(
-                    value: false,
-                    onChanged: (value) {},
-                  ),
+                  title: 'History',
+                  subtitle: "Your's History",
                 ),
               ],
             ),
@@ -56,7 +57,7 @@ class MySettings extends StatelessWidget {
                     backgroundColor: Colors.purple,
                   ),
                   title: 'About',
-                  subtitle: "Learn more about Ziar'App",
+                  subtitle: "Learn more about JSR User 'App",
                 ),
               ],
             ),
@@ -65,16 +66,24 @@ class MySettings extends StatelessWidget {
               settingsGroupTitle: "Account",
               items: [
                 SettingsItem(
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const SignInDialog(
+                            title: 'Sign Out',
+                            subTitle: "Are you sure you want to sign out?",
+                          );
+                        });
+                  },
                   icons: Icons.exit_to_app_rounded,
                   title: "Sign Out",
                 ),
                 SettingsItem(
                   onTap: () {},
                   icons: CupertinoIcons.delete_solid,
-                  title: "Delete account",
+                  title: "Privacy Policy",
                   titleStyle: const TextStyle(
-                    color: Colors.red,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

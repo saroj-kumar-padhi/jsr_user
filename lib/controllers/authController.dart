@@ -57,7 +57,7 @@ class AuthController extends GetxController {
         codeAutoRetrievalTimeout: (e) {
           isLoading(false);
           Fluttertoast.showToast(
-            msg: "$e",
+            msg: e,
             // Other toast configuration...
           );
         },
@@ -112,7 +112,7 @@ class AuthController extends GetxController {
   Future<void> logOut() async {
     try {
       await auth.signOut();
-      Get.offAll(LogIn());
+      Get.offAll(const LogIn());
     } catch (error) {
       logger.d(error);
     }

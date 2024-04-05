@@ -90,8 +90,8 @@ class MyMainScreen extends StatelessWidget {
                   Obx(
                     () => Icon(
                       mainScreenController.currentTab.value == 2
-                          ? Icons.person
-                          : Icons.person,
+                          ? Icons.payment
+                          : Icons.payment_rounded,
                       color: mainScreenController.currentTab.value == 2
                           ? kprimaryColor
                           : Colors.grey,

@@ -1,12 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_example/controllers/authController.dart';
 import 'package:food_example/screens/phone.dart';
 import 'package:get/get.dart';
 
 class SignInDialog extends StatelessWidget {
-  const SignInDialog({Key? key}) : super(key: key);
+  final String title;
+  final String subTitle;
+
+  const SignInDialog({super.key, required this.title, required this.subTitle});
 
   @override
   Widget build(BuildContext context) {
+    final AuthController authController = Get.put(AuthController());
     return GestureDetector(
       onTap: () {
         // This will dismiss the keyboard when tapping outside the dialog
@@ -25,13 +32,13 @@ class SignInDialog extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 10),
-                  const Text(
-                    "Sign In",
+                  Text(
+                    title,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 15),
-                  const Text(
-                    "To enable this feature you have to sign in",
+                  Text(
+                    subTitle,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 20),
@@ -66,10 +73,14 @@ class SignInDialog extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            Get.to(() =>
-                                const LogIn()); // Navigate to the login screen
+                            title == 'Sign Out'
+                                ? authController.logOut()
+                                : Get.to(() =>
+                                    const LogIn()); // Navigate to the login screen
                           },
-                          child: const Text('Sign In'),
+                          child: title == 'Sign Out'
+                              ? const Text('Sign Out')
+                              : const Text("Sign Out"),
                         ),
                       ),
                     ],
