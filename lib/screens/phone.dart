@@ -7,7 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_example/controllers/foodController.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:logger/logger.dart';
 
 import '../controllers/authController.dart';
 

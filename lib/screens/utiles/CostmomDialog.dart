@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_example/controllers/authController.dart';
 import 'package:food_example/screens/phone.dart';
@@ -80,7 +78,7 @@ class SignInDialog extends StatelessWidget {
                           },
                           child: title == 'Sign Out'
                               ? const Text('Sign Out')
-                              : const Text("Sign Out"),
+                              : const Text("Sign In"),
                         ),
                       ),
                     ],

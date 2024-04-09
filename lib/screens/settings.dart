@@ -81,7 +81,7 @@ class MySettings extends StatelessWidget {
                 ),
                 SettingsItem(
                   onTap: () {},
-                  icons: CupertinoIcons.delete_solid,
+                  icons: CupertinoIcons.lock,
                   title: "Privacy Policy",
                   titleStyle: const TextStyle(
                     fontWeight: FontWeight.bold,

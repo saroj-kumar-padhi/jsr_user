@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class HomeSearchBar extends StatelessWidget {
-  SerchController serchController = Get.put(SerchController());
+  final SerchController serchController = Get.put(SerchController());
   HomeSearchBar({
     super.key,
   });

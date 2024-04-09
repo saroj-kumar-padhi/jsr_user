@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_example/screens/Buyfood.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class FoodCard extends StatelessWidget {
@@ -30,10 +28,19 @@ class FoodCard extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.1,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                      image: NetworkImage(food['foodImage']),
-                      fit: BoxFit.fill,
-                    ),
+
+                    // image: DecorationImage(
+                    //   image: NetworkImage(food['foodImage']),
+                    //   fit: BoxFit.fill,
+                    // ),
+                  ),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.fill,
+                    imageUrl: food['foodImage'],
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
                 const SizedBox(height: 10),

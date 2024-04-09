@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_example/constants.dart';
+import 'package:food_example/screens/cartPage.dart';
 import 'package:food_example/screens/home_screen.dart';
 import 'package:food_example/controllers/mainScreenController.dart';
 import 'package:food_example/screens/settings.dart';
@@ -9,10 +10,14 @@ import 'package:iconsax/iconsax.dart';
 class MyMainScreen extends StatelessWidget {
   MyMainScreen({super.key});
 
-  List screens = [
+  final List screens = [
     const HomeScreen(),
-    const Scaffold(),
-    const Scaffold(),
+    const CartPage(),
+    const Scaffold(
+      body: Center(
+        child: Text("Payments not initiated"),
+      ),
+    ),
     const MySettings(),
   ];
 
@@ -62,7 +67,7 @@ class MyMainScreen extends StatelessWidget {
                   Obx(
                     () => Icon(
                       mainScreenController.currentTab.value == 1
-                          ? Iconsax.shopping_cart
+                          ? Iconsax.shopping_bag
                           : Iconsax.shopping_cart,
                       color: mainScreenController.currentTab.value == 1
                           ? kprimaryColor
@@ -90,8 +95,8 @@ class MyMainScreen extends StatelessWidget {
                   Obx(
                     () => Icon(
                       mainScreenController.currentTab.value == 2
-                          ? Icons.payment
-                          : Icons.payment_rounded,
+                          ? Icons.payments
+                          : Icons.payment,
                       color: mainScreenController.currentTab.value == 2
                           ? kprimaryColor
                           : Colors.grey,
@@ -99,7 +104,7 @@ class MyMainScreen extends StatelessWidget {
                   ),
                   Obx(
                     () => Text(
-                      "Profile",
+                      "Payments",
                       style: TextStyle(
                         fontSize: 14,
                         color: mainScreenController.currentTab.value == 2

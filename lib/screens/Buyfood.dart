@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_example/constants.dart';
 import 'package:food_example/controllers/foodController.dart';
 import 'package:food_example/controllers/mainScreenController.dart';
 import 'package:food_example/widgets/food_counter.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:logger/logger.dart';
 
 class BuyFoodScreen extends StatelessWidget {
   final Map<String, dynamic> food;
@@ -25,12 +28,27 @@ class BuyFoodScreen extends StatelessWidget {
             Expanded(
               flex: 6,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  var box = Hive.box('myBox');
+
+                  int index = box.get("index") ?? 0;
+                  box.put(index, {
+                    "foodName": food['foodName'],
+                    "foodImage": food['foodImage'],
+                    "price": food['price'],
+                  });
+                  Logger logger = Logger();
+                  logger.d(box.get(index));
+                  box.put("index", ++index);
+
+                  Fluttertoast.showToast(
+                      msg: "Your Item has been added to the cart");
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kprimaryColor,
                   foregroundColor: Colors.white,
                 ),
-                child: const Text("Make it Own"),
+                child: const Text("Add to cart"),
               ),
             ),
             const SizedBox(width: 10),
@@ -211,7 +229,7 @@ class BuyFoodScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Make it Own",
+                            "Add to cart",
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:food_example/controllers/foodController.dart';
 import 'package:food_example/models/food.dart';
 import 'package:food_example/screens/Buyfood.dart';
@@ -9,7 +7,9 @@ import 'package:food_example/widgets/quick_screen_appbar.dart';
 import 'package:get/get.dart';
 
 class AvailableFoodsScreen extends StatelessWidget {
-  FoodController foodController = Get.put(FoodController());
+  final FoodController foodController = Get.put(FoodController());
+
+  AvailableFoodsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
