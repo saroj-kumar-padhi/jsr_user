@@ -12,7 +12,7 @@ class MyMainScreen extends StatelessWidget {
 
   final List screens = [
     const HomeScreen(),
-    const CartPage(),
+    CartPage(),
     const Scaffold(
       body: Center(
         child: Text("Payments not initiated"),

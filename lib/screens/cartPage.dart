@@ -2,14 +2,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:food_example/constants.dart';
+import 'package:food_example/controllers/razorPayController.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({super.key});
+  final RazorPayController razorPayController = Get.put(RazorPayController());
+  CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     var box = Hive.box('myBox');
+    int sum = 0;
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -32,6 +37,7 @@ class CartPage extends StatelessWidget {
                         itemCount: box.get("index"),
                         itemBuilder: (BuildContext context, int index) {
                           var data = box.get(index);
+                          sum = sum + int.parse(data['price']);
                           return AnimationConfiguration.staggeredList(
                             position: index,
                             duration: const Duration(milliseconds: 375),
@@ -106,7 +112,7 @@ class CartPage extends StatelessWidget {
                                         padding:
                                             const EdgeInsets.only(right: 20),
                                         child: Text(
-                                          '₹${data['price']}',
+                                          '₹${data['price']} (1)',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -125,24 +131,29 @@ class CartPage extends StatelessWidget {
                 : const Center(
                     child: Text("No items is added to your cart"),
                   ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 30),
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(kprimaryColor),
-                  minimumSize: MaterialStateProperty.all<Size>(
-                      Size(size.width * 0.7, size.height * 0.05)),
-                ),
-                onPressed: () {
-                  // Add your onPressed logic here
-                },
-                child: const Text(
-                  'Proceed to Buy',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
+            box.get("index") != 0
+                ? Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(kprimaryColor),
+                        minimumSize: MaterialStateProperty.all<Size>(
+                            Size(size.width * 0.7, size.height * 0.05)),
+                      ),
+                      onPressed: () {
+                        // Add your onPressed logic here
+                        razorPayController.updateOptions(sum: sum);
+
+                        razorPayController.openPayment();
+                      },
+                      child: const Text(
+                        'Proceed to Buy',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
           ],
         ),
       ),
