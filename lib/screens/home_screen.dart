@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  "Categories",
+                  "Special Thali",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

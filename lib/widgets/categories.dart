@@ -14,36 +14,29 @@ class Categories extends StatelessWidget {
   Widget build(BuildContext context) {
     final CategoryController categoryController = Get.put(CategoryController());
 
-    return Obx(
-      () => SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: List.generate(
-            catgories.length,
-            (index) => GestureDetector(
-              onTap: () => categoryController.selectCategory(catgories[index]),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: categoryController.selectedCategory.value ==
-                          catgories[index]
-                      ? kprimaryColor
-                      : Colors.white,
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
-                ),
-                margin: const EdgeInsets.only(right: 20),
-                child: Text(
-                  catgories[index],
-                  style: TextStyle(
-                    color: categoryController.selectedCategory.value ==
-                            catgories[index]
-                        ? Colors.white
-                        : Colors.grey.shade600,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(
+          thaliList.length,
+          (index) => GestureDetector(
+            // onTap: () => categoryController.selectCategory(catgories[index]),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    backgroundImage: AssetImage(thaliList[index].thaliImage),
+                    // You might need to adjust the radius and other properties according to your design
+                    radius: 30,
                   ),
-                ),
+                  Text(
+                    thaliList[index].thaliName,
+                    style: customTextStyle,
+                  )
+                ],
               ),
             ),
           ),

@@ -36,6 +36,7 @@ class BuyFoodScreen extends StatelessWidget {
                     "foodName": food['foodName'],
                     "foodImage": food['foodImage'],
                     "price": food['price'],
+                    "quantity": mainScreenController.currentNumber.value,
                   });
                   Logger logger = Logger();
                   logger.d(box.get(index));

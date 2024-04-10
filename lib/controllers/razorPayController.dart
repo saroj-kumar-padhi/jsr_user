@@ -15,7 +15,7 @@ class RazorPayController extends GetxController {
     // Initialize options map
   }
 
-  void updateOptions({required int sum}) {
+  void updateOptions({required num sum}) {
     options = {
       'key': 'rzp_test_XrQWdyHxeCGyIR',
       'amount': sum * 100,

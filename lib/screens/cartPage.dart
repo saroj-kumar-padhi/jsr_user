@@ -13,7 +13,7 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var box = Hive.box('myBox');
-    int sum = 0;
+    num sum = 0;
 
     Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -37,7 +37,8 @@ class CartPage extends StatelessWidget {
                         itemCount: box.get("index"),
                         itemBuilder: (BuildContext context, int index) {
                           var data = box.get(index);
-                          sum = sum + int.parse(data['price']);
+                          sum = sum +
+                              (int.parse(data['price']) * data['quantity']);
                           return AnimationConfiguration.staggeredList(
                             position: index,
                             duration: const Duration(milliseconds: 375),
@@ -112,7 +113,7 @@ class CartPage extends StatelessWidget {
                                         padding:
                                             const EdgeInsets.only(right: 20),
                                         child: Text(
-                                          '₹${data['price']} (1)',
+                                          '₹${int.parse(data['price']) * data['quantity']} (${data['quantity'].toString()})',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -131,7 +132,7 @@ class CartPage extends StatelessWidget {
                 : const Center(
                     child: Text("No items is added to your cart"),
                   ),
-            box.get("index") != 0
+            (box.get("index") != 0 && box.get("index") != null)
                 ? Padding(
                     padding: const EdgeInsets.only(bottom: 30),
                     child: ElevatedButton(
