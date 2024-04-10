@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_example/controllers/thaliController.dart';
 import 'package:food_example/models/category.dart';
 import 'package:get/get.dart';
 import 'package:food_example/constants.dart';
@@ -12,7 +13,7 @@ class Categories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CategoryController categoryController = Get.put(CategoryController());
+    ThaliController thaliController = Get.put(ThaliController());
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -20,7 +21,7 @@ class Categories extends StatelessWidget {
         children: List.generate(
           thaliList.length,
           (index) => GestureDetector(
-            // onTap: () => categoryController.selectCategory(catgories[index]),
+            onTap: () => thaliController.fetchThaliData(),
             child: Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Column(
