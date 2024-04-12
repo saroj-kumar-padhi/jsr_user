@@ -2,7 +2,7 @@ class ThaliModel {
   final String thaliName;
   final String thaliImage;
   final String thaliPrice;
-  final List<String> thaliItems;
+  final List<dynamic> thaliItems;
 
   ThaliModel(
       {required this.thaliName,

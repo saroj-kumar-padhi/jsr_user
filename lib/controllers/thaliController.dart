@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food_example/models/thaliModel.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 
 class ThaliController extends GetxController {
+  List<ThaliModel> thaliList = []; // Define thaliList to store fetched data
+
   Future<void> fetchThaliData() async {
     DocumentReference documentReference = FirebaseFirestore.instance
         .collection('admin')
@@ -11,10 +12,24 @@ class ThaliController extends GetxController {
     try {
       DocumentSnapshot documentSnapshot = await documentReference.get();
       var data = documentSnapshot.data();
+      var thaliData = data as Map<String, dynamic>;
 
-      ThaliModel thaliModel = ThaliModel.fromJson(data as Map<String, dynamic>);
+      thaliData.forEach(
+        (thaliName, thaliData) {
+          String thaliImage = thaliData['thaliImage'];
+          List<dynamic> thaliItems = thaliData['thaliItems'];
+          String thaliName = thaliData['thaliName'];
+          String thaliPrice = thaliData['thaliPrice'].toString();
 
-      Logger().d(thaliModel.thaliName);
+          ThaliModel thaliModel = ThaliModel(
+              thaliName: thaliName,
+              thaliImage: thaliImage,
+              thaliPrice: thaliPrice,
+              thaliItems: thaliItems);
+
+          thaliList.add(thaliModel);
+        },
+      );
     } catch (e) {}
   }
 }
