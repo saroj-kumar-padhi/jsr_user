@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Biofit",
         colorScheme: ColorScheme.fromSeed(seedColor: kprimaryColor),
-        scaffoldBackgroundColor: kbackgroundColor,
+        scaffoldBackgroundColor: Colors.white,
         useMaterial3: true,
       ),
       home: MyMainScreen(),

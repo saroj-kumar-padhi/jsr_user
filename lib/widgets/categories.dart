@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_example/controllers/thaliController.dart';
-import 'package:food_example/models/category.dart';
+
 import 'package:get/get.dart';
+
+import '../screens/thaliItems.dart';
 
 class Categories extends StatelessWidget {
   final String currentCat;
@@ -15,37 +18,48 @@ class Categories extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: FutureBuilder(
-        future:
-            thaliController.fetchThaliData(), // Call the method to fetch data
+        future: thaliController.fetchThaliData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // While waiting for data, show a loading indicator
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            // If an error occurs during data fetching, display an error message
             return const Center(child: Text('Error fetching data'));
           } else {
-            // Once data is fetched, build the row of items dynamically
             return Row(
               children: List.generate(
                 thaliController.thaliList.length,
-                (index) => Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        backgroundImage: NetworkImage(
-                            thaliController.thaliList[index].thaliImage),
-                        // You might need to adjust the radius and other properties according to your design
-                        radius: 30,
-                      ),
-                      Text(
-                        thaliController.thaliList[index].thaliName,
-                        style: customTextStyle,
-                      )
-                    ],
+                (index) => InkWell(
+                  onTap: () {
+                    Get.to(ThaliItems(
+                      thaliItem: thaliController.thaliList[index],
+                    ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: thaliController.thaliList[index].thaliImage,
+                          imageBuilder: (context, imageProvider) =>
+                              CircleAvatar(
+                            backgroundColor: Colors.white,
+                            backgroundImage: imageProvider,
+                            radius: 50,
+                          ),
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          thaliController.thaliList[index].thaliName,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

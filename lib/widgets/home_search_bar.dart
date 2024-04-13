@@ -3,6 +3,8 @@ import 'package:food_example/controllers/serchController.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../constants.dart';
+
 class HomeSearchBar extends StatelessWidget {
   final SerchController serchController = Get.put(SerchController());
   HomeSearchBar({

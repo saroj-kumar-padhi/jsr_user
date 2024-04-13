@@ -6,6 +6,7 @@ class ThaliController extends GetxController {
   List<ThaliModel> thaliList = []; // Define thaliList to store fetched data
 
   Future<void> fetchThaliData() async {
+    thaliList.clear();
     DocumentReference documentReference = FirebaseFirestore.instance
         .collection('admin')
         .doc('v1nZgXloX8hDk87Z9VhYMZOas0S2');

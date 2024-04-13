@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_example/screens/allThaliScreen.dart';
 import 'package:food_example/screens/searchPage.dart';
 import 'package:food_example/screens/utiles/coustomSerchLike.dart';
 import 'package:food_example/widgets/categories.dart';
@@ -42,12 +43,22 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  "Special Thali",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Special Thali's",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Get.to(AllThaliScreen());
+                        },
+                        child: const Text("View All"))
+                  ],
                 ),
                 const SizedBox(height: 20),
                 Categories(currentCat: currentCat),
