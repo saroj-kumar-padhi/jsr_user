@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:food_example/screens/absentee.dart';
+import 'package:food_example/screens/drawer/contact_us.dart';
+import 'package:food_example/screens/drawer/order.dart';
+import 'package:food_example/screens/drawer/plan&price.dart';
 import 'package:food_example/screens/foodCategory.dart';
+import 'package:food_example/screens/main_screen.dart';
+import 'package:food_example/screens/settings.dart';
 import 'package:food_example/screens/singleFood.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,16 +17,152 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "MESS",
+          style: GoogleFonts.poppins(
+            fontSize: 22,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      drawer: Drawer(
+        backgroundColor: const Color.fromARGB(255, 156, 243, 201),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundImage: NetworkImage(
+                        'https://www.w3schools.com/howto/img_avatar.png'),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Suraj',
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    'Suraj@example.com',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text(
+                'Home',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onTap: () {
+                Get.to(MyMainScreen());
+                // Navigate to home screen
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text(
+                'Profile',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onTap: () {
+                Get.to(MySettings());
+                // Navigate to profile screen
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.contact_support),
+              title: Text(
+                'Contact us',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onTap: () {
+                Get.to(ContactUSPage());
+                // Navigate to profile screen
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.shopping_cart),
+              title: Text(
+                'Orders',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onTap: () {
+                Get.to(OrderPage());
+                // Navigate to orders screen
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text(
+                'Plan & Price',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onTap: () {
+                Get.to(PlanPricePage());
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text(
+                'Settings',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onTap: () {
+                Get.to(MySettings());
+                // Navigate to settings screen
+              },
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: size.height * .17, child: _buildProfileCard(size)),
+            // SizedBox(height: size.height * .17,
+            //  child: _buildProfileCard(size)),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             Expanded(
                 child: ListView(
               children: [
+                SizedBox(
+                  height: size.height * 0.01,
+                ),
+                _buildProfileCard(size),
                 SizedBox(
                   height: size.height * 0.01,
                 ),
@@ -47,11 +189,14 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Text(
-                          "Today's Menu",
-                          style: GoogleFonts.roboto(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Today's Menu",
+                            style: GoogleFonts.poppins(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         )
                       ],
@@ -84,11 +229,14 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Text(
-                          "Extra Services",
-                          style: GoogleFonts.roboto(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Extra Services",
+                            style: GoogleFonts.poppins(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         )
                       ],
@@ -98,33 +246,43 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        15.0), // Adjust the radius as needed
-                  ),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: size.height * 0.2,
-                        width: size.width,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                "https://www.shutterstock.com/image-vector/poor-attendance-work-2d-vector-600nw-2081359120.jpg"),
-                            fit: BoxFit
-                                .cover, // Adjust the fit as per your requirement
+                InkWell(
+                  onTap: () {
+                    Get.to(AbsenteePage()
+                        //  const AbsenteePage()
+                        );
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          15.0), // Adjust the radius as needed
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: size.height * 0.2,
+                          width: size.width,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  "https://www.shutterstock.com/image-vector/poor-attendance-work-2d-vector-600nw-2081359120.jpg"),
+                              fit: BoxFit
+                                  .cover, // Adjust the fit as per your requirement
+                            ),
                           ),
                         ),
-                      ),
-                      Text(
-                        "Absentee Mark",
-                        style: GoogleFonts.roboto(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Absentee Mark",
+                            style: GoogleFonts.poppins(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -144,9 +302,9 @@ Widget _buildProfileCard(Size size) {
       color: Colors.greenAccent,
       child: SizedBox(
         width: size.width,
-        height: size.height * .16,
+        height: size.height * .13,
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(left: 15, top: 10, bottom: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -168,7 +326,7 @@ Widget _buildProfileCard(Size size) {
                   ),
                   const SizedBox(height: 10),
                   const Padding(
-                    padding: EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(left: 15),
                     child: Text(
                       "chief suraj",
                       style: TextStyle(
@@ -180,37 +338,36 @@ Widget _buildProfileCard(Size size) {
                   ),
                 ],
               ),
-              const Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 70),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
+              Expanded(
+                child: const Row(
+                  children: [
+                    Padding(
+                        padding: EdgeInsets.only(left: 70),
                         child: Text(
                           "6280644889",
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: 14),
                         )),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 27),
-                    child: Row(
-                      children: [
-                        Text(
-                          "Plan Exp : ",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text("2024-05-12",
+                    Padding(
+                      padding: EdgeInsets.only(left: 27),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Plan Exp:",
                             style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.redAccent))
-                      ],
-                    ),
-                  )
-                ],
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text("2024-05-12",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.redAccent))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               )
             ],
           ),

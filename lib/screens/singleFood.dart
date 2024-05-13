@@ -33,16 +33,16 @@ class SingleFood extends StatelessWidget {
                   ),
                   Text(
                     "₹ 45",
-                    style: GoogleFonts.roboto(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(
                     "Paratha,Chole,Dal,Pickle",
-                    style: GoogleFonts.roboto(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(
@@ -75,16 +75,16 @@ class SingleFood extends StatelessWidget {
                   ),
                   Text(
                     "₹ 60",
-                    style: GoogleFonts.roboto(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(
                     "Rice,Dal,Panner,Curd,Pickle",
-                    style: GoogleFonts.roboto(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(
@@ -111,16 +111,16 @@ class SingleFood extends StatelessWidget {
                         ),
                         Text(
                           "₹ 65",
-                          style: GoogleFonts.roboto(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700,
+                          style: GoogleFonts.poppins(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         Text(
-                          "chole,Bhature,chesse cake",
-                          style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
+                          "Chole Bhature,chesse cake",
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],

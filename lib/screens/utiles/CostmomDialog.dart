@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_example/controllers/authController.dart';
 import 'package:food_example/screens/phone.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignInDialog extends StatelessWidget {
   final String title;
@@ -33,11 +34,19 @@ class SignInDialog extends StatelessWidget {
                   Text(
                     title,
                     textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 15),
                   Text(
                     subTitle,
                     textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   //Buttons

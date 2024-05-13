@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_example/constants.dart';
 import 'package:food_example/screens/cartPage.dart';
+import 'package:food_example/screens/drawer/order.dart';
 import 'package:food_example/screens/home_screen.dart';
 import 'package:food_example/controllers/mainScreenController.dart';
+import 'package:food_example/screens/payments.dart';
 import 'package:food_example/screens/settings.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -12,12 +14,9 @@ class MyMainScreen extends StatelessWidget {
 
   final List screens = [
     const HomeScreen(),
-    CartPage(),
-    const Scaffold(
-      body: Center(
-        child: Text("Payments not initiated"),
-      ),
-    ),
+    OrderPage(),
+    // CartPage(),
+    PaymentsPage(),
     const MySettings(),
   ];
 
@@ -28,7 +27,7 @@ class MyMainScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
-        height: 70,
+        height: MediaQuery.of(context).size.height * 0.095,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -76,7 +75,7 @@ class MyMainScreen extends StatelessWidget {
                   ),
                   Obx(
                     () => Text(
-                      "Cart",
+                      "Order",
                       style: TextStyle(
                         fontSize: 14,
                         color: mainScreenController.currentTab.value == 1
