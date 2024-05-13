@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_example/constants.dart';
 import 'package:food_example/screens/utiles/CostmomDialog.dart';
 import 'package:food_example/screens/utiles/bigUserCard.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MySettings extends StatelessWidget {
   const MySettings({super.key});
@@ -33,6 +34,14 @@ class MySettings extends StatelessWidget {
                   icons: CupertinoIcons.bubble_left_bubble_right_fill,
                   iconStyle: IconStyle(),
                   title: 'Notifications',
+                  titleStyle: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  subtitleStyle: GoogleFonts.poppins(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
                   subtitle: "Your's Notification",
                 ),
                 SettingsItem(
@@ -45,6 +54,14 @@ class MySettings extends StatelessWidget {
                   ),
                   title: 'History',
                   subtitle: "Your's History",
+                  titleStyle: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  subtitleStyle: GoogleFonts.poppins(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ],
             ),
@@ -58,6 +75,14 @@ class MySettings extends StatelessWidget {
                   ),
                   title: 'About',
                   subtitle: "Learn more about JSR User 'App",
+                  titleStyle: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  subtitleStyle: GoogleFonts.poppins(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ],
             ),
@@ -70,7 +95,7 @@ class MySettings extends StatelessWidget {
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return const SignInDialog(
+                          return SignInDialog(
                             title: 'Sign Out',
                             subTitle: "Are you sure you want to sign out?",
                           );
@@ -78,13 +103,18 @@ class MySettings extends StatelessWidget {
                   },
                   icons: Icons.exit_to_app_rounded,
                   title: "Sign Out",
+                  titleStyle: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 SettingsItem(
                   onTap: () {},
                   icons: CupertinoIcons.lock,
                   title: "Privacy Policy",
-                  titleStyle: const TextStyle(
-                    fontWeight: FontWeight.bold,
+                  titleStyle: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
