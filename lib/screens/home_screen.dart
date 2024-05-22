@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_example/screens/absentee.dart';
 import 'package:food_example/screens/drawer/contact_us.dart';
 import 'package:food_example/screens/drawer/order.dart';
 import 'package:food_example/screens/drawer/plan&price.dart';
 import 'package:food_example/screens/foodCategory.dart';
 import 'package:food_example/screens/main_screen.dart';
+import 'package:food_example/screens/otpPage.dart';
+import 'package:food_example/screens/phone.dart';
 import 'package:food_example/screens/settings.dart';
 import 'package:food_example/screens/singleFood.dart';
 import 'package:get/get.dart';
@@ -167,8 +171,26 @@ class HomeScreen extends StatelessWidget {
                   height: size.height * 0.01,
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.to(const FoodCategory());
+                  // onTap: () {
+                  //   Get.to(const FoodCategory());
+                  // },
+
+                  onTap: () async {
+                    if (FirebaseAuth.instance.currentUser != null) {
+                      Get.to(const FoodCategory());
+                    } else {
+                      Fluttertoast.showToast(
+                        msg:
+                            "To use services of app first you should create account.",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.grey[600],
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+                      Get.to(LogIn());
+                    }
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -207,8 +229,22 @@ class HomeScreen extends StatelessWidget {
                   height: 20,
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.to(const SingleFood());
+                  onTap: () async {
+                    if (FirebaseAuth.instance.currentUser != null) {
+                      Get.to(const SingleFood());
+                    } else {
+                      Fluttertoast.showToast(
+                        msg:
+                            "To use services of app first you should create account.",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.grey[600],
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+                      Get.to(LogIn());
+                    }
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -247,10 +283,22 @@ class HomeScreen extends StatelessWidget {
                   height: 20,
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.to(AbsenteePage()
-                        //  const AbsenteePage()
-                        );
+                  onTap: () async {
+                    if (FirebaseAuth.instance.currentUser != null) {
+                      Get.to(const AbsenteePage());
+                    } else {
+                      Fluttertoast.showToast(
+                        msg:
+                            "To use services of app first you should create account.",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.grey[600],
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+                      Get.to(LogIn());
+                    }
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(
