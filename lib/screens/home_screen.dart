@@ -171,27 +171,27 @@ class HomeScreen extends StatelessWidget {
                   height: size.height * 0.01,
                 ),
                 InkWell(
-                  // onTap: () {
-                  //   Get.to(const FoodCategory());
-                  // },
-
-                  onTap: () async {
-                    if (FirebaseAuth.instance.currentUser != null) {
-                      Get.to(const FoodCategory());
-                    } else {
-                      Fluttertoast.showToast(
-                        msg:
-                            "To use services of app first you should create account.",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.grey[600],
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
-                      Get.to(LogIn());
-                    }
+                  onTap: () {
+                    Get.to(FoodCategory());
                   },
+
+                  // onTap: () async {
+                  //   if (FirebaseAuth.instance.currentUser != null) {
+                  //   Get.to(const FoodCategory());
+                  // } else {
+                  //   Fluttertoast.showToast(
+                  //     msg:
+                  //         "To use services of app first you should create account.",
+                  //     toastLength: Toast.LENGTH_SHORT,
+                  //     gravity: ToastGravity.BOTTOM,
+                  //     timeInSecForIosWeb: 1,
+                  //     backgroundColor: Colors.grey[600],
+                  //     textColor: Colors.white,
+                  //     fontSize: 16.0,
+                  //   );
+                  //   Get.to(LogIn());
+                  // }
+
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
@@ -229,23 +229,24 @@ class HomeScreen extends StatelessWidget {
                   height: 20,
                 ),
                 InkWell(
-                  onTap: () async {
-                    if (FirebaseAuth.instance.currentUser != null) {
-                      Get.to(const SingleFood());
-                    } else {
-                      Fluttertoast.showToast(
-                        msg:
-                            "To use services of app first you should create account.",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.grey[600],
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
-                      Get.to(LogIn());
-                    }
+                  onTap: () {
+                    //   if (FirebaseAuth.instance.currentUser != null) {
+                    Get.to(const SingleFood());
                   },
+                  //   } else {
+                  //     Fluttertoast.showToast(
+                  //       msg:
+                  //           "To use services of app first you should create account.",
+                  //       toastLength: Toast.LENGTH_SHORT,
+                  //       gravity: ToastGravity.BOTTOM,
+                  //       timeInSecForIosWeb: 1,
+                  //       backgroundColor: Colors.grey[600],
+                  //       textColor: Colors.white,
+                  //       fontSize: 16.0,
+                  //     );
+                  //     Get.to(LogIn());
+                  //   }
+                  // },
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
@@ -283,23 +284,24 @@ class HomeScreen extends StatelessWidget {
                   height: 20,
                 ),
                 InkWell(
-                  onTap: () async {
-                    if (FirebaseAuth.instance.currentUser != null) {
-                      Get.to(const AbsenteePage());
-                    } else {
-                      Fluttertoast.showToast(
-                        msg:
-                            "To use services of app first you should create account.",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.grey[600],
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
-                      Get.to(LogIn());
-                    }
+                  onTap: () {
+                    // if (FirebaseAuth.instance.currentUser != null) {
+                    Get.to(const AbsenteePage());
                   },
+                  //   else {
+                  //     Fluttertoast.showToast(
+                  //       msg:
+                  //           "To use services of app first you should create account.",
+                  //       toastLength: Toast.LENGTH_SHORT,
+                  //       gravity: ToastGravity.BOTTOM,
+                  //       timeInSecForIosWeb: 1,
+                  //       backgroundColor: Colors.grey[600],
+                  //       textColor: Colors.white,
+                  //       fontSize: 16.0,
+                  //     );
+                  //     Get.to(LogIn());
+                  //   }
+                  // },
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(

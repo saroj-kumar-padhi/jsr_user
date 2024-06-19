@@ -1,9 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class OrderPage extends StatelessWidget {
-  const OrderPage({super.key});
+  final DatabaseReference ordersRef = FirebaseDatabase.instance.ref('Orders');
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  OrderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +31,28 @@ class OrderPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: ListView.builder(
-          itemCount: 3,
-          itemBuilder: (BuildContext context, int index) {
+      body: FirebaseAnimatedList(
+        query: ordersRef.orderByChild('userId').equalTo(auth.currentUser?.uid),
+        itemBuilder: (context, DataSnapshot snapshot,
+            Animation<double> animation, int index) {
+          if (snapshot.value != null) {
+            final Map<dynamic, dynamic> data =
+                snapshot.value as Map<dynamic, dynamic>;
+            //  final timestamp = order['timestamp'];
+            final dateTime = DateTime.fromMillisecondsSinceEpoch(
+                int.tryParse(data['timestamp'].toString()) ?? 0);
+            final formattedDate =
+                DateFormat('dd-MM-yyyy h:mm a').format(dateTime);
+
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Card(
                 elevation: 6,
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.13,
-                  width: MediaQuery.of(context).size.width * 0.85,
+                  width: MediaQuery.of(context).size.width * 0.9,
                   decoration: BoxDecoration(
-                    //color: Colors.greenAccent,
                     borderRadius: BorderRadius.circular(10),
-                    // border: Border.all(color: Colors.black, width: 0.5),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -46,42 +61,40 @@ class OrderPage extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        //
-                        child: Image.asset(
+                        child: Image.network(
+                          data['foodImage'],
                           height: MediaQuery.of(context).size.height * 0.11,
                           width: MediaQuery.of(context).size.width * 0.3,
-                          "assets/images/breakfast.webp",
-                          fit: BoxFit
-                              .fill, // Adjust the fit as per your requirement
+                          fit: BoxFit.fill,
                         ),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Lunch",
+                            data['foodName'],
                             style: GoogleFonts.poppins(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                           Text(
-                            "13-06-2024  2:36PM",
+                            formattedDate.toString(),
                             style: GoogleFonts.poppins(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           Text(
-                            "1 day ago",
+                            data['foodType'],
                             style: GoogleFonts.poppins(
                               fontSize: 13,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
                           Text(
-                            "Price: 50rs",
+                            "Price: ${data['foodPrice']}rs",
                             style: GoogleFonts.poppins(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
@@ -94,7 +107,19 @@ class OrderPage extends StatelessWidget {
                 ),
               ),
             );
-          }),
+          } else {
+            return Center(
+              child: Text(
+                'No orders found.',
+                style: GoogleFonts.poppins(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
